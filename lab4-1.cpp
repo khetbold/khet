@@ -15,11 +15,35 @@ class Employee{
 		void get_values(int sequence, char name[20], char job[10], float worked_hours);
 		void show();
 		char* get_name();
+                void set_name(char n[]);
+                int get_sequence();
+                void set_sequence(int n);
 		char* get_job();
+                void set_job(char n[]);
 		float calculate_salary();
 		bool add_work_hour(float hour);
+                float get_worked_hous();
+                void set_worked_hours(float n);
 };
+float get_worked_hous(){
+return this->worked_hours;
+}
+void set_worked_hours(float n){
+this ->sequence=n;
+}
+int get_sequence(){
+return this->sequence;
+}
+ void set_sequence(int n){
+this ->sequence=n;
+}
+void Employee::set_name(char n[]){
 
+strcpy(this->name, n);
+}
+void Employee::set_job(n[]){
+strcpy(this->job, n);
+}
 void Employee::set_first_values(){
 	this->sequence = 0;
 	strcpy(this->name, "");
@@ -74,7 +98,7 @@ int main(){
 	char tushaal[10];
 	float worked_hour;
 	float hour;
-	Employee emp[];
+	Employee emp[100];
 	cout<<"Хэдэн ажилчин оруулах вэ?"<<"\n";
 	cin>>n;
 	for(int i = 0; i < n; i++){

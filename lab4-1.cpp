@@ -25,16 +25,16 @@ class Employee{
                 float get_worked_hous();
                 void set_worked_hours(float n);
 };
-float get_worked_hous(){
+float Employee::get_worked_hous(){
 return this->worked_hours;
 }
-void set_worked_hours(float n){
+void Employee::set_worked_hours(float n){
 this ->sequence=n;
 }
-int get_sequence(){
+int Employee::get_sequence(){
 return this->sequence;
 }
- void set_sequence(int n){
+ void Employee::set_sequence(int n){
 this ->sequence=n;
 }
 void Employee::set_name(char n[]){

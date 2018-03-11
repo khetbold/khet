@@ -22,28 +22,36 @@ class Employee{
                 void set_job(char n[]);
 		float calculate_salary();
 		bool add_work_hour(float hour);
-                float get_worked_hous();
+                float get_worked_hours();
                 void set_worked_hours(float n);
+		void empcopy(Employee &);
+		void sortSalary(Employee e[], int n);
 };
-float Employee::get_worked_hous(){
-return this->worked_hours;
-}
-void Employee::set_worked_hours(float n){
-this ->sequence=n;
-}
-int Employee::get_sequence(){
-return this->sequence;
-}
- void Employee::set_sequence(int n){
-this ->sequence=n;
-}
-void Employee::set_name(char n[]){
 
-strcpy(this->name, n);
+float Employee::get_worked_hours(){
+	return this->worked_hours;
 }
-void Employee::set_job(n[]){
-strcpy(this->job, n);
+
+void Employee::set_worked_hours(float n){
+	this ->sequence=n;
 }
+
+int Employee::get_sequence(){
+	return this->sequence;
+}
+
+void Employee::set_sequence(int n){
+	this ->sequence=n;
+}
+
+void Employee::set_name(char n[]){
+	strcpy(this->name, n);
+}
+
+void Employee::set_job(char n[]){
+	strcpy(this->job, n);
+}
+
 void Employee::set_first_values(){
 	this->sequence = 0;
 	strcpy(this->name, "");
@@ -87,9 +95,29 @@ bool Employee::add_work_hour(float hour){
 	}
 }
 
+void Employee::empcopy(Employee &e){
+	strcpy(name, e.get_name());
+	strcpy(job, e.get_job());
+	worked_hours = e.get_worked_hours();
+	sequence = e.get_sequence();
+}
+
 void Employee::show(){
 	cout<<"***************** \nДугаар: "<<sequence<<"\n"<<"Нэр: "<<name<<"\n"<<"Албан тушаал: "<<job<<"\n"
 	<<"Ажилласан цаг: "<<worked_hours<<"\n"<<"*****************"<<"\n";
+}
+
+void sortSalary(Employee e[], int n){
+	for(int i = 1; i <= n; i++){
+		for(int k = i + 1; k <= n; k++){
+			if(e[i].calculate_salary() < e[k].calculate_salary()){
+				Employee temp;
+				temp.empcopy(e[i]);
+				e[i].empcopy(e[k]);
+				e[k].empcopy(temp);
+			}
+		}
+	}
 }
 
 int main(){
@@ -101,7 +129,7 @@ int main(){
 	Employee emp[100];
 	cout<<"Хэдэн ажилчин оруулах вэ?"<<"\n";
 	cin>>n;
-	for(int i = 0; i < n; i++){
+	for(int i = 1; i <= n; i++){
 		emp[i].set_first_values();
 	}
 	while(1){
@@ -109,7 +137,9 @@ int main(){
 		cout<<"2. Цалин харах \n";
 		cout<<"3. Ажилласан цагийг нэмэх \n";
 		cout<<"4. Ажилчиний мэдээлэл харах \n";
-		cout<<"5. Гарах \n_________________ \n";
+		cout<<"5. Ажилчидийг цалингаар нь бүлэглэх \n";
+		cout<<"6. Бүх ажилчидийн мэдээллийг харах \n";
+		cout<<"7. Гарах \n_________________ \n";
 		cin>>k;
 		switch(k){
 			case 1:
@@ -146,6 +176,15 @@ int main(){
 				emp[k].show();
 				break;
 			case 5:
+				sortSalary(emp,n);
+				break;
+			case 6:
+				for(int i = 1; i <= n; i++){
+					cout<<"---------- \nДугаар: "<<emp[i].get_sequence()<<"\n"<<"Нэр: "<<emp[i].get_name()<<"\n"<<
+					"Цалин: "<<emp[i].calculate_salary()<<"\n---------- \n";
+				}	
+				break;
+			case 7:
 				return 0;
 				break;
 		}
